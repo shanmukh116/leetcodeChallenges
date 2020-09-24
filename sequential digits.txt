@@ -1,0 +1,30 @@
+/**An integer has sequential digits if and only if each digit in the number is one more than the previous digit.
+
+Return a sorted list of all the integers in the range [low, high] inclusive that have sequential digits.
+
+Example 1:
+
+Input: low = 100, high = 300
+Output: [123,234]
+Example 2:
+
+Input: low = 1000, high = 13000
+Output: [1234,2345,3456,4567,5678,6789,12345]
+
+
+
+solution:**/
+
+def sequentialDigits(self, low: int, high: int) -> List[int]:
+        k="123456789"
+        s=[]
+        for i in range(len(k)-1):
+            for j in range(i,len(k)):
+                s.append("".join(k[i:j+1]))
+        a=[]        
+        for i in range(len(s)):
+            s[i]=int(s[i])
+            if(s[i]>=low and s[i]<=high ):
+                a.append(s[i])
+        k=sorted(a)        
+        return k  

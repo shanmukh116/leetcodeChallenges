@@ -1,0 +1,47 @@
+Parenthesis Checker 
+Given an expression string x. Examine whether the pairs and the orders of “{“,”}”,”(“,”)”,”[“,”]” are correct in exp.
+For example, the function should return 'true' for exp = “[()]{}{[()()]()}” and 'false' for exp = “[(])”.
+
+Example 1:
+
+Input:
+{([])}
+
+Output: 
+true
+
+Explanation: 
+{ ( [ ] ) }. Same colored brackets can form 
+balaced pairs, with 0 number of 
+unbalanced bracket.
+
+solution:
+
+
+def ispar(s):
+    k=[]
+    for i in range(len(s)):
+        if(s[i] in ['(','[','{']):
+            k.append(s[i])
+        elif(len(k)==0):
+            return False
+        else:
+            h=k.pop()
+            if(h=='('):
+                if(s[i]!=')'):
+                    return False
+            elif(h=='{'):
+                if(s[i]!='}'):
+                    return False
+            elif(h=='['):
+                if(s[i]!=']'):
+                    return False             
+    if(len(k)==0):
+        return True
+    else:
+        return False
+s=str(input())
+if ispar(s):
+    print("balanced")
+else:
+    print("Not balanced")
