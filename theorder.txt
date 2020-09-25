@@ -1,0 +1,41 @@
+
+THE ORDER::
+
+Given a string s of length n, choose any subsequence of length n-1, which appears first in the dictionary order among other subsequences of the same length.
+
+Input format
+First line contains n, the size of the string
+String s follows on the next line
+Output format
+The subsequence which occurs first in the dictionary
+Constraints
+1 < n < 300000
+s contains only lowercase alphabets
+Example Input
+5
+abcda
+Output
+abca
+Explanation
+All the subsequences of length n-1 are ['bcda','acda','abda','abca','abcd']
+
+After sorting the list becomes ['abca', 'abcd', 'abda', 'acda', 'bcda']
+
+Thus abca occurs first in the dictionary order
+
+
+Solution:
+
+n=int(input())
+s=input()
+c=-1
+for i in range(len(s)-1):
+    if(s[i]>s[i+1]):
+        c=i
+        break
+ans=""
+if(c>=0):
+    ans=s[:c]+s[c+1:]
+else:
+    print(s[:len(s)-1])
+print(ans)
