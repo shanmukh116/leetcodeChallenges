@@ -1,0 +1,78 @@
+Connect Woods:
+ 
+A scientist wants to combine pieces of wood of two different types.
+
+There are n pieces of wood A , and m pieces of wood B.
+
+The ith piece of wood A has two parameters li & ri which indicates that it can combine with any piece of wood B that has length between li & ri (both inclusive).
+
+Also for each piece of wood B we are given its length.
+
+The aim is to associate each piece of wood A, with some piece of wood B following the above condition. Each piece of wood B can be used at most once.
+
+Find if this is possible or not.
+
+Input Format
+First line contains two integers n(the number of woods of type A) & m(the number of woods of type B) respectively.
+n lines follow. Each of the n lines contains two integers li and ri, the parameters for each of woods of type A.
+Then there are m integers on a single line, denoting the length of each wood of type B.
+Output Format
+If we can assign one wood of type B to each wood of type A, print YES else print NO.
+Constraints
+1<= n <= 50000
+1<= m <= 50000
+Each of li,ri ( li<=ri )of wood A and length of wood B belongs to [1,106].
+Example Input 1
+3 4
+3 7
+1 3
+2 5
+4 8 5 3
+Output
+YES
+Explanation
+One of the possible ways of assignment are :
+Assign wood B of length 4 to wood A with parameters (2,5).
+Assign wood B of length 5 to wood A with parameters (3,7).
+Assign wood B of length 3 to wood A with parameters (1,3).
+
+Example Input 2
+2 3
+3 7
+4 8
+2 5 10
+Output
+NO
+Explanation
+We can assign wood B of length 5 to only one of 1st or 2nd wood of type A.
+But one wood of type A is left unassigned.
+Hence, there is no way.
+
+
+Solution:
+
+
+from bisect import bisect_right
+a,b=map(int,input().split())
+k=[]
+for i in range(a):
+    c,d=map(int,input().split())
+    k.append([c,d])    
+s=list(map(int,input().split()))
+k.sort(key=lambda x:(x[0],x[1]))
+s.sort()
+c=0
+for i in range(len(k)-1,-1,-1):
+    left=k[i][0]
+    right=k[i][1]
+    p=bisect_right(s,right,0,len(s))
+    ele=s[p-1]
+    if left<=ele:
+        del s[p-1]
+    else:
+        c+=1
+        break
+if(c==0):
+    print("YES")
+else:
+    print("NO")
